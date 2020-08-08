@@ -1,0 +1,77 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block home_content %}
+<div class="container">
+    <h5>Edit Supervisor | Username: {{ supervisors.admin.username }} | ID: {{ supervisors.admin.id }} </h5>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card btn btn-primary">
+                    <a href="" class="btn btn-primary">Edit Supervisor</a>
+                </div>
+              <div class="card-body">
+
+                   <form action="/edit_supervisor_save" method="POST">
+                    {% csrf_token %}
+                      <div class="form-group" hidden>
+                        <label for="exampleInputEmail1">Id</label>
+                        <input type=""number class="form-control"  placeholder="First Name . . ." name="supervisors_id" value="{{ supervisors.admin.id }}">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleInputPassword1">First Name</label>
+                        <input type="text" class="form-control" placeholder="Last Name . . ." name="first_name" value="{{ supervisors.admin.first_name }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Last Name</label>
+                        <input type="text" class="form-control" placeholder="Last Name . . ." name="last_name" value="{{ supervisors.admin.last_name }}">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleInputPassword1">UserName</label>
+                        <input type="text" class="form-control" placeholder="UserName . . ." name="username" value="{{ supervisors.admin.username }}">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleInputPassword1">Email</label>
+                        <input type="email" class="form-control" placeholder="example@gmail.com" name="email" value="{{ supervisors.admin.email }}">
+                      </div>
+    {#                    <div class="form-group">#}
+    {#                        <label for="exampleFormControlSelect1">Gender</label>#}
+    {#                        <select class="form-control" id="exampleFormControlSelect1" name="gender">#}
+    {#                          <option>Select Gneder</option>#}
+    {#                          <option>Male</option>#}
+    {#                          <option>Female</option>#}
+    {#                          <option>Other</option>#}
+    {#                        </select>#}
+    {#                      </div>#}
+                       <div class="form-group">
+                        <label for="exampleInputPassword1">Address</label>
+                        <input type="text-area" class="form-control" placeholder="Address . . . " name="address" value="{{ supervisors.address }}">
+                      </div>
+
+                        {% if messages %}
+                        <div class="form-group">
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <span class="btn btn-info btn-block">{{message}}</span>
+                            {% endif %}
+                            {% endfor %}
+                            </div>
+                            <div class="form-group">
+                            {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <span class="btn btn-danger btn-block">{{message}}</span>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+
+                      <button type="submit" class="btn btn-primary btn-block">Save Supervisor</button>
+                    </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock home_content %}
