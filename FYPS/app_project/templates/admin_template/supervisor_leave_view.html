@@ -1,0 +1,55 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block home_content %}
+
+    <div class="container-fluid">
+        <h3>Supervisor Apply For Leave</h3>
+          <div class="row">
+              <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card btn btn-primary">
+                        <a href="" class="btn btn-primary">Leaves Approvals</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Supervisor ID</th>
+                            <th>Student Name</th>
+                            <th>Apply Date</th>
+                            <th>Leave Message</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for leave in supervisor_leaves %}
+                        <tr>
+                            <td>{{ leave.id }}</td>
+                            <td>{{ leave.supervisor_id.admin.id }}</td>
+                            <td>{{ leave.supervisor_id.admin.first_name }} {{ leave.supervisor_id.admin.last_name }}</td>
+{#                            <td>{{ feedback.student_id.session_year_id.session_start_year }} - {{ feedback.student_id.session_year_id.session_end_year }}</td>#}
+                            <td>{{ leave.leave_date }}</td>
+                            <td>{{ leave.leave_message }}</td>
+                            <td>
+                                {% if leave.leave_status == 0 %}
+                                <a href="{% url 'supervisor_leave_approve' leave_id=leav.id %}" class="btn btn-success btn-sm" >Approve</a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'supervisor_leave_disapprove' leave_id=leav.id %}" >Disapprove</a>
+                                {% elif leave.leave_status == 1  %}
+                                 <button class="btn btn-warning" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Approved</button>
+                                {% else %}
+                                <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Disapproved</button>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- /.content -->
+
+{% endblock home_content %}

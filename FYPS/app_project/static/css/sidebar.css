@@ -26,11 +26,14 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: #2b5740 !important;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.navbar-light .navbar-nav a.nav-link{
+    color:#FFFFFF;
 }
 
 .navbar-btn {
@@ -63,9 +66,12 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    /*background: #7386D5;*/
+    /*background: #34424200;*/
     color: #fff;
+    background-color: #2b5740;
     transition: all 0.3s;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
 }
 
 #sidebar.active {
@@ -115,7 +121,11 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #2b5740;
+}
+
+#sidebar .sidebar-header h3{
+    color: #fffd00;
 }
 
 #sidebar .sidebar-header strong {
@@ -132,6 +142,7 @@ span {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: #fff;
 }
 
 #sidebar ul li a:hover {

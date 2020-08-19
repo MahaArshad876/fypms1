@@ -22,7 +22,7 @@
 	<div class="top-bar">
 		<div class="container">
 			<div class="col-12 text-right">
-				<p><a href="tel:+3244026658">Contact Supervisor</a></p>
+				<p><a href="https://www.ue.edu.pk/" target="_blank">ue.edu.pk</a></p>
 			</div>
 		</div>
 	</div>
@@ -35,7 +35,7 @@
 	<nav class="navbar bg-light navbar-light navbar-expand-lg">
 		<div class="container">
 			<a href="index.html" class="navbar-brand"><img src="{% static 'images/ue.jpg' %}"
-				alt="logo" title="logo"></a>
+				alt="logo" title="logo"></a><h6 style="font-family: sans-serif;">FYP Work Flow Engine</h6>
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#responsive">
@@ -44,13 +44,9 @@
 
 			<div class="collapse navbar-collapse" id="responsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="" class="nav-link active">Home</a></li>
-					<li class="nav-item"><a href="" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="" class="nav-link">Services</a></li>
+					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link active">Home</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Project</a></li>
-					<li class="nav-item"><a href="" class="nav-link">Contact Us</a></li>
 					<li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-					<li class="nav-item"><a href="" class="nav-link">Logout</a></li>
 				</ul>
 			</div>
            {# <span>Hello, {{ request.user }}</span> #}

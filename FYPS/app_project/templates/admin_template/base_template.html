@@ -22,68 +22,139 @@
 </head>
 
 <body>
-
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Admin Dashboard </h3>
+                <h3>FYPMS | Admin Login </h3>
                 <strong>BS</strong>
+            <hr>
+                <div class="info text-center">
+                    <a href="">User > {{ user.username }}</a>
+                </div>
+            <hr>
+
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="/admin_home">
-                        <i class="fas fa-home"></i>
+                <li class="nav-item">
+                    {% url 'admin_home' as admin_home %}
+                    <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+{#                        <i class="fas fa-th"></i>#}
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="/add_supervisor">
-                        <i class="fas fa-user"></i>
+                    {% url 'add_supervisor' as add_supervisor %}
+                    <a href="{{ add_supervisor }} " class="nav-link {% if request.path == add_supervisor %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
                         Add Supervisor
                     </a>
                 </li>
                 <li>
-                    <a href="/manage_supervisor">
-                        <i class="fas fa-user"></i>
+                    {% url 'manage_supervisor' as manage_supervisor %}
+                    <a href="{{ manage_supervisor }}" class="nav-link {% if request.path == manage_supervisor %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
                         Manage Supervisor
                     </a>
                 </li>
                 <li>
-                    <a href="/add_student">
-                        <i class="fas fa-user"></i>
+                    {% url 'add_student' as add_student %}
+                    <a href="{{ add_student }}" class="nav-link {% if request.path == add_student %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+{#                        <i class="fas fa-list-alt"></i>#}
                         Add Student
                     </a>
                 </li>
                 <li>
-                    <a href="/manage_student">
-                        <i class="fas fa-user"></i>
+                    {% url 'manage_student' as manage_student %}
+                    <a href="{{ manage_student }}" class="nav-link {% if request.path == manage_student %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
                         Manage Student
                     </a>
                 </li>
                 <li>
+                    {% url 'add_program' as add_program %}
+                    <a href="{{ add_program }}" class="nav-link {% if request.path == add_program %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+{#                        <i class="fas fa-align-justify"></i>#}
+                        Add Program
+                    </a>
+                </li>
+                <li>
+                    {% url 'manage_program' as manage_program %}
+                    <a href="{{ manage_program }}" class="nav-link {% if request.path == manage_program %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Manage Program
+                    </a>
+                </li>
+                <li>
+                    {% url 'assign_supervisor' as assign_supervisor %}
+                    <a href="{{ assign_supervisor }}" class="nav-link {% if request.path == assign_supervisor %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Assign Supervisor
+                    </a>
+                </li>
+                <li>
+                    {% url 'change_supervisor' as change_supervisor %}
+                    <a href="{{ change_supervisor }}" class="nav-link {% if request.path == change_supervisor %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Change Supervisor
+                    </a>
+                </li>
+                <li>
+                    {% url 'student_project_view' as student_project_view %}
+                    <a href="{{ student_project_view }}" class="nav-link {% if request.path == student_project_view %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        View Project Approval
+                    </a>
+                </li>
+                <li>
+                    {% url 'student_feedback_message' as student_feedback_message %}
+                    <a href="{{ student_feedback_message }}" class="nav-link {% if request.path == student_feedback_message %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Student Feedback
+                    </a>
+                </li>
+                <li>
+                    {% url 'supervisor_feedback_message' as supervisor_feedback_message %}
+                    <a href="{{ supervisor_feedback_message }}" class="nav-link {% if request.path == supervisor_feedback_message %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Supervisor Feedback
+                    </a>
+                </li>
+
+{#                <li>#}
+{#                    {% url 'change_supervisor' as change_supervisor %}#}
+{#                    <a href="{{ change_supervisor }}" class="nav-link {% if request.path == change_supervisor %} btn btn-primary active {% endif %}">#}
+{#                        <i class="fas fa-user"></i>#}
+{#                        Supervisor Feedback#}
+{#                    </a>#}
+{#                </li>#}
+                <li>
+                    {% url 'supervisor_leave_view' as supervisor_leave_view %}
+                    <a href="{{ supervisor_leave_view }}" class="nav-link {% if request.path == supervisor_leave_view %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Supervisor Leaves
+                    </a>
+                </li>
+                <li>
                     <a href="#">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-layer-group"></i>
                         Profile
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fas fa-image"></i>
-                        Portfolio
+                        <i class=""></i>
+
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fas fa-question"></i>
-                        FAQ
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-paper-plane"></i>
-                        Contact
+                        <i class=""></i>
+
                     </a>
                 </li>
             </ul>
@@ -116,6 +187,9 @@
             });
         });
     </script>
+    {% block custom_js %}
+    {% endblock custom_js %}
+
 </body>
 
 </html>

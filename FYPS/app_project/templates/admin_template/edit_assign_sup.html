@@ -1,0 +1,72 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block home_content %}
+<div class="container">
+    <h5>Edit Assign Supervisor | Section: {{ section.section_name }} | Section ID: {{ section.id }}</h5>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card btn btn-primary">
+                    <a href="" class="btn btn-primary">Edit Assign Supervisor</a>
+                </div>
+              <div class="card-body">
+
+                   <form action="/edit_assign_sup_save" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Program</label>
+                           <select class="form-control" name="program" id="">
+                               {% for prog in programs %}
+                                   <option value="{{ prog.id }}" {% if prog.id == sectiom.program_id.id %} selected{% endif %}>{{ prog.program_name }}</option>
+                               {% endfor %}
+                           </select>
+                      </div>
+                   <div class="form-group">
+                        <label>Supervisor</label>
+                           <select class="form-control" name="supervisor" id="">
+                               {% for supervisor in supervisors %}
+                                   <option value="{{supervisor.id }}" {% if supervisor.id == sectiom.supervisor_id.id %} selected{% endif %}>{{ supervisor.first_name }} {{ supervisor.last_name }}</option>
+                               {% endfor %}
+                           </select>
+                      </div>
+                     <div class="form-group">
+                        <label for="exampleInputPassword1">Section</label>
+                        <input type="text" class="form-control" placeholder="Enter Program . . ." name="section" value="{{ section.section_name }}">
+                        <input type="hidden" class="form-control" placeholder="Enter Program . . ." name="section_id" value="{{ section.id }}">
+                      </div>
+{#                    <div class="form-group">#}
+{#                        {% if messages %}#}
+{##}
+{#                            {% for message in messages %}#}
+{#                            {% if message.tags == 'success' %}#}
+{#                                <span class="btn btn-info btn-block">{{message}}</span>#}
+{#                            {% endif %}#}
+{#                            {% if message.tags == 'error' %}#}
+{#                                <span class="btn btn-danger btn-block">{{message}}</span>#}
+{#                            {% endif %}#}
+{#                            {% endfor %}#}
+{##}
+{#                        {% endif %}#}
+{#                     </div>#}
+                    <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+{#                        {% if message.tags == 'error' %}#}
+{#                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>#}
+{#                        {% endif %}#}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                      <button type="submit" class="btn btn-primary btn-block">Save Assign Supervisor</button>
+                    </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock home_content %}

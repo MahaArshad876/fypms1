@@ -27,52 +27,55 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Supervisor Dashboard </h3>
+                <h3>FYPMS | Supervisor Login</h3>
                 <strong>BS</strong>
+            <hr>
+                <div class="info text-center">
+                    <a href="">User- {{ user.username }}</a>
+                </div>
+            <hr>
             </div>
 
+
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="/student_home">
-                        <i class="fas fa-home"></i>
+                <li class="nav-item">
+                    {% url 'supervisor_home' as supervisor_home %}
+                    <a href="{{ supervisor_home }}" class="nav-link {% if request.path == supervisor_home %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
                         Home
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fas fa-user"></i>
-                        Supervisor
+                        <i class="fas fa-layer-group"></i>
+                        Send Message Student
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'supervisor_message' as supervisor_message %}
+                    <a href="{{ supervisor_message }}" class="nav-link {% if request.path == supervisor_message %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Send Message Admin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'leave_apply_supervisor' as leave_apply_supervisor %}
+                    <a href="{{ leave_apply_supervisor }}" class="nav-link {% if request.path == leave_apply_supervisor %} btn btn-primary active {% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        Apply For Leave
                     </a>
                 </li>
                <li>
                     <a href="#">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-layer-group"></i>
                         View Student
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-layer-group"></i>
                         Profile
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-image"></i>
-                        Portfolio
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-question"></i>
-                        Upload Result
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-paper-plane"></i>
-                        Contact
                     </a>
                 </li>
             </ul>

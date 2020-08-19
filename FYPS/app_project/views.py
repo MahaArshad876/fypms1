@@ -7,7 +7,7 @@ from django.shortcuts import render
 from app_project.EmailBackend import EmailBackEnd
 
 
-def Home(request):
+def index(request):
     return render(request, "index.html")
 
 

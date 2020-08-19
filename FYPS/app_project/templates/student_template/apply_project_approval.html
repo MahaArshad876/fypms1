@@ -1,0 +1,100 @@
+{% extends 'student_template/base_template_stud.html' %}
+
+{% block home_content %}
+<div class="container">
+    <h4>Apply For Project Approval</h4>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card btn btn-primary">
+                    <a href="" class="btn btn-primary">Apply For Project</a>
+                </div>
+              <div class="card-body">
+
+                   <form action="{% url 'apply_project_approval_save' %}" method="post">
+                <div class="card-body">
+                    {% csrf_token %}
+                   <div class="form-group">
+                    <label>Apply Date </label>
+                    <input type="date" name="apply_date" class="form-control" placeholder="Apply Date ...">
+                  </div>
+                <div class="form-group">
+                    <label>Project Title</label>
+                    <input type="text" class="form-control" name="project_title">
+                </div>
+                <div class="form-group">
+                    <label>Abstract</label>
+                    <textarea class="form-control" rows="6" name="abstract"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Conclusion</label>
+                    <textarea class="form-control" rows="6" name="conclusion"></textarea>
+                </div>
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block" id="fetch_student">Apply</button>
+                </div>
+               </form>
+              </div>
+
+            <!-- Approval View -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title btn btn-primary" >Project Approval View</h3>
+              </div>
+
+               <div class="table">
+               <table class="table">
+                   <tr>
+                       <th>ID</th>
+                       <th>Apply Date</th>
+                       <th>Project Title</th>
+                       <th>Abstract</th>
+                       <th>Conclusion</th>
+                       <th>Approval Status</th>
+                   </tr>
+                   {% for row in approval_data %}
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.apply_date }}</td>
+                            <td>{{ row.project_title }}</td>
+                            <td>{{ row.abstract }}</td>
+                            <td>{{ row.conclusion }}</td>
+                            <td>
+                                {% if row.approval_status == 1 %}
+                                    <span class="btn btn-success btn-sm">Approved</span>
+                                {% elif row.approval_status == 2 %}
+                                    <span class="btn btn-danger btn-sm">Rejected</span>
+                                {% else %}
+                                    <span class="btn btn-info btn-sm">Pending</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                   {% endfor %}
+               </table>
+               </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock home_content %}

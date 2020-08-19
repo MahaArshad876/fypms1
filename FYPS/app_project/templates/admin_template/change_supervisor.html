@@ -1,0 +1,42 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block home_content %}
+
+
+    <div class="container">
+    <h4>Change Supervisor</h4>
+    <div class="row">
+	<div class="col-12">
+		<div class="card card-body">
+        <h6>Change Supervisor</h6>
+        <div class="table_responsive">
+            <table class="table">
+				<tr>
+					<th>ID</th>
+					<th>Section Name</th>
+					<th>Program Name</th>
+					<th>Program ID</th>
+					<th>Supervisor Name</th>
+                    <th>Action</th>
+				</tr>
+				{% for section in sections %}
+				<tr>
+					<td>{{section.id}}</td>
+					<td>{{section.section_name}}</td>
+					<td>{{section.program_id.program_name}}</td>
+					<td>{{section.program_id.id}}</td>
+					<td>{{section.supervisor_id.first_name}} {{section.supervisor_id.last_name}}</td>
+					<td><a class="btn btn-sm btn-info" href="/edit_assign_sup/{{ section.id }}">Edit</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+        </div>
+
+		</div>
+	</div>
+</div>
+    </div>
+
+
+
+{% endblock home_content %}>

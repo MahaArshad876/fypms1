@@ -1,0 +1,174 @@
+{% extends 'admin_template/base_template.html' %}
+
+{% block home_content %}
+
+    <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card btn btn-primary">
+                        <a href="" class="btn btn-info">Student FeedBack</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+{#                            <th>Student Session</th>#}
+                            <th>Message</th>
+                            <th>Sent On</th>
+                            <th>Reply</th>
+                        </tr>
+                        {% for feedback in feedback_date %}
+                        <tr>
+                            <td>{{ feedback.id }}</td>
+                            <td>{{ feedback.student_id.admin.id }}</td>
+                            <td>{{ feedback.student_id.admin.first_name }} {{ feedback.student_id.admin.last_name }}</td>
+{#                            <td>{{ feedback.student_id.session_year_id.session_start_year }} - {{ feedback.student_id.session_year_id.session_end_year }}</td>#}
+                            <td>{{ feedback.student_message }}</td>
+                            <td>{{ feedback.created_at }}</td>
+                            <td>
+                                {% if feedback.admin_reply == "" %}
+                                <button class="btn btn-success reply_open_modal" data-toggle="modal" data-target="#reply_modal">Reply</button>
+{#                                <button class="btn btn-success" data-toggle="modal" data-target="#reply_modal">Reply</button>#}
+                                {% else %}
+                                {{ feedback.admin_reply }}
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+  <div class="modal fade" id="reply_modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Reply</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+{#            <form action="{% url 'student_feedback_message_save' method="post" %}">#}
+                <p>Reply To : <span id="reply_name"></span></p>
+                <input type="hidden" id="reply_id" name="reply_id">
+                <textarea class="form-control" rows="5" id="reply_message"></textarea>
+                <button id="reply_btn" class="btn btn-info btn-block">Reply</button>
+{#             </form>#}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <!-- /.content -->
+
+{% endblock home_content %}
+
+{% block custom_js %}
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type='text/javascript'
+src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $(".reply_open_modal").click(function(){
+            var id=$(this).parents("tr").children("td:eq(0)").text();
+            var name=$(this).parents("tr").children("td:eq(2)").text();
+            $("#reply_id").val(id);
+            $("#reply_name").text(name);
+        });
+
+
+        $(document).on("click","#reply_btn",function(){
+
+                $(this).attr("disabled","disabled")
+                $(this).text("Sending Reply...")
+
+                var id=$("#reply_id").val();
+                var message=$("#reply_message").val()
+
+                $.ajax({
+                        url:'{% url 'student_feedback_message_replied' %}',
+                        type:'POST',
+                        data:{id:id,message:message},
+                    })
+                    .done(function(response){
+
+                        if(response=="True"){
+                            alert("Reply Sent")
+                        }
+                        else{
+                            alert("Error in Sending Reply")
+                        }
+                        location.reload()
+                    })
+                    .fail(function(){
+                        alert("Error in Sending Reply")
+                    })
+           });
+
+    });
+</script>
+
+
+{#<script type='text/javascript'>#}
+{#    $(document).ready(function(){#}
+{#        $(".reply_open_modal").click(function(){#}
+{#            var id=$(this).parents("tr").children("td:eq(0)").text();#}
+{#            var name=$(this).parents("tr").children("td:eq(2)").text();#}
+{#            console.log(id);#}
+{#            console.log(name);#}
+{#            $("#reply_id").val(id);#}
+{#            $("#reply_name").text(name);#}
+{#        });#}
+{##}
+{#        $(document).on("click","#reply_btn",function(){#}
+{##}
+{#                $(this).attr("disabled","disabled")#}
+{#                $(this).text("Sending Reply...")#}
+{##}
+{#                var id=$("#reply_id").val();#}
+{#                var message=$("#reply_message").val()#}
+{##}
+{#                $.ajax({#}
+{#                        url:'{% url 'student_feedback_message_replied' %}',#}
+{#                        type:'POST',#}
+{#                        data:{id:id,message:message},#}
+{#                    })#}
+{#                    .done(function(response){#}
+{##}
+{#                        if(response=="True"){#}
+{#                            alert("Reply Sent")#}
+{#                        }#}
+{#                        else{#}
+{#                            alert("Error in Sending Reply")#}
+{#                        }#}
+{#                        location.reload()#}
+{#                    })#}
+{#                    .fail(function(){#}
+{#                        alert("Error in Sending Reply")#}
+{#                    })#}
+{#           });#}
+{##}
+{##}
+{#    });#}
+{#</script>#}
+{% endblock custom_js %}

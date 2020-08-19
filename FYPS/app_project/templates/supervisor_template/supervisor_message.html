@@ -1,0 +1,74 @@
+{% extends 'supervisor_template/base_template_sup.html' %}
+
+{% block home_content %}
+<div class="container">
+    <h4>Supervisor Messages to Admin</h4>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card btn btn-primary">
+                    <a href="" class="btn btn-primary">Leave a Message  for Admin</a>
+                </div>
+              <div class="card-body">
+
+                   <form action="{% url 'supervisor_message_save' %}" method="post">
+                <div class="card-body">
+                    {% csrf_token %}
+                  <div class="form-group">
+                    <label>Send Message</label>
+                    <textarea class="form-control" rows="6" name="supervisor_message"></textarea>
+                  </div>
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block" id="fetch_student">Send Message</button>
+                </div>
+               </form>
+              </div>
+
+            <!-- leave history -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title btn btn-primary" >Messages History</h3>
+              </div>
+
+               <div class="table">
+               <table class="table">
+                   <tr>
+                       <th>ID</th>
+                       <th>Supervisor Message</th>
+                       <th>Admin Reply</th>
+                   </tr>
+                   {% for row in message_data %}
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.message_admin }}</td>
+                            <td>{{ row.message_reply }}</td>
+                        </tr>
+                   {% endfor %}
+               </table>
+               </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock home_content %}
